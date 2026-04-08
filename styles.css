@@ -458,3 +458,36 @@ option { background: #0a0a0a; color: #fff; }
         margin: 0;
     }
 }
+
+.services-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Importante para móviles */
+    margin-top: 20px;
+}
+
+.services-list span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.services-list i {
+    color: #06b6d4; /* Color cian como el de DevStudio */
+    font-size: 1.1rem;
+}
+
+/* Ajuste para que se vea perfecto en tu iPhone */
+@media (max-width: 768px) {
+    .services-list {
+        flex-direction: column; /* Uno debajo del otro en celular */
+        gap: 12px;
+    }
+    .services-list .separator {
+        display: none; /* Quitamos los puntos en móvil */
+    }
+}
