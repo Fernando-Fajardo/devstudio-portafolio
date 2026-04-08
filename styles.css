@@ -493,3 +493,28 @@ option { background: #0a0a0a; color: #fff; }
         display: none; /* Quitamos los puntos en móvil */
     }
 }
+
+/* Reglas especiales para celulares */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem; /* Achica el título principal */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 1rem; /* Achica los subtítulos */
+    }
+
+    /* Ajusta los iconos para que no se amontonen */
+    .hero-content {
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    /* Si tienes un contenedor de servicios, que se pongan uno abajo del otro */
+    .servicios-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
