@@ -469,16 +469,14 @@ option { background: #0a0a0a; color: #fff; }
 }
 
 .services-list span {
-    display: flex;
+    color: #ffffff;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    color: #e0e0e0;
 }
 
 .services-list i {
-    color: #06b6d4; /* Color cian como el de DevStudio */
-    font-size: 1.1rem;
+    color: #06b6d4 !important; /* El azul cian de DevStudio */
+    margin-right: 8px;
 }
 
 /* Ajuste para que se vea perfecto en tu iPhone */
