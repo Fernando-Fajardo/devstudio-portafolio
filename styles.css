@@ -634,44 +634,43 @@ nav a.active {
     color: #00d4ff; /* Resalta el texto también */
 }
 
-/* --- MODAL DE SERVICIOS (CENTRADO ABSOLUTO) --- */
+/* --- MODAL DE SERVICIOS (CENTRADO ABSOLUTO CORREGIDO) --- */
 .service-modal {
+    /* 1. EMPIEZA OCULTO (Sin !important aquí) */
     display: none; 
+    
     position: fixed;
-    z-index: 2000; /* Asegúrate de que esté sobre el menú si abren ambos */
+    z-index: 3000; 
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     
-    /* Fondo oscuro y desenfoque pro (Mantenido y mejorado) */
-    background: rgba(0, 0, 0, 0.88) !important;
+    /* Fondo oscuro y desenfoque */
+    background: rgba(0, 0, 0, 0.9) !important;
     backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px); /* Soporte para Safari iPhone */
+    -webkit-backdrop-filter: blur(15px);
     
-    /* FLEXBOX ES LA CLAVE PARA CENTRAR EN PANTALLA */
-    display: flex !important; /* Activamos flexbox */
-    justify-content: center;   /* Centra horizontalmente en pantalla */
-    align-items: center;       /* Centra verticalmente en pantalla */
+    /* 2. ESTO SOLO FUNCIONARÁ CUANDO EL JS ACTIVE EL MODAL */
+    justify-content: center;   
+    align-items: center;       
 }
 
 /* --- MODAL DE SERVICIOS (VERSION FINAL SIN ERRORES) --- */
 .service-modal {
-    display: none; /* JS cambiará esto a 'flex' */
+    display: none; /* Obligatorio empezar en none */
     position: fixed;
-    z-index: 9999; /* Máxima prioridad sobre todo */
+    z-index: 3000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9) !important;
+    background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     
-    /* Centrado Maestro */
-    justify-content: center;
+    /* Estos solo funcionarán cuando el JS cambie el display a flex */
+    justify-content: center; 
     align-items: center;
-    padding: 20px; /* Margen de seguridad para móviles */
 }
 
 .service-modal-content {
@@ -706,7 +705,20 @@ nav a.active {
     z-index: 10;
 }
 
-/* Estilo interno del contenido del modal */
-.modal-detail-icon { font-size: 4rem; color: #06b6d4; margin-bottom: 20px; }
-.modal-detail-title { font-size: 2rem; margin-bottom: 15px; color: #fff; }
-.modal-detail-text { color: #94a3b8; line-height: 1.6; font-size: 1.1rem; }
+/* Estilos de los elementos internos */
+.modal-detail-icon { 
+    font-size: 4rem; 
+    color: #06b6d4; 
+    margin-bottom: 20px;
+}
+.modal-detail-title { 
+    font-size: 1.8rem; 
+    color: #fff; 
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.modal-detail-text { 
+    color: #94a3b8; 
+    font-size: 1.1rem; 
+    line-height: 1.6;
+}
