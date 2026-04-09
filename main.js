@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeServiceBtn = document.querySelector('.close-service');
 
     const serviceDetails = {
-        'Desarrollo Web': 'Construimos ecosistemas digitales de alto rendimiento bajo arquitecturas escalables. Implementamos tecnologías de vanguardia como React y Next.js para garantizar velocidad, seguridad avanzada y una experiencia de usuario (UX) de clase mundial orientada a la conversión profesional.',
+        'Desarrollo Web': 'Construimos ecosistemas digitales de alto rendimiento bajo arquitecturas escalables. Implementamos tecnologías de vanguardia para garantizar velocidad, seguridad avanzada y una experiencia de usuario (UX) de clase mundial orientada a la conversión profesional.',
         'E-commerce': 'Desarrollamos soluciones transaccionales de alto rendimiento con integración nativa de inventarios, automatización de pedidos y pasarelas de pago blindadas. Nuestros sistemas permiten la gestión omnicanal de stock en tiempo real, asegurando escalabilidad operativa con alta demanda transaccional.',
         'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
         'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas, oficinas, hogares, etc.',
