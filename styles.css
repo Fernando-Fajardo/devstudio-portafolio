@@ -31,7 +31,7 @@ section, main {
     background: transparent !important;
 }
 
-/* --- 3. NAVEGACIÓN (PC) --- */
+/* --- 3. NAVEGACIÓN PC --- */
 .nav-main {
     display: flex;
     justify-content: space-between;
@@ -40,20 +40,18 @@ section, main {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1001; /* Aumentado para estar sobre todo */
+    z-index: 100;
     background: rgba(10, 10, 10, 0.7);
     backdrop-filter: blur(10px);
 }
 
 .nav-brand {
     font-size: 2.2rem;
+    font-weight: 400; /* Sin negrita pesada */
     color: #06b6d4;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
-
-.nav-brand b { font-weight: 800; }
-.nav-brand span { font-weight: 300; }
 
 .nav-menu {
     display: flex;
@@ -62,56 +60,43 @@ section, main {
     margin-right: auto;
 }
 
-/* Estilo de los enlaces con línea y sombra */
 .nav-menu li a {
     color: #f1f5f9;
     text-decoration: none;
+    /* Aumentamos de 25px a 40px para mayor separación */
     margin: 0 40px; 
     font-size: 1rem;
     font-weight: 400;
     transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-    position: relative;
-    padding: 5px 0;
+    letter-spacing: 0.5px; /* Un toque de espacio entre letras para legibilidad */
 }
 
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #00d4ff;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-    box-shadow: 0px 0px 8px 1px rgba(0, 212, 255, 0.7); 
-}
-
-.nav-menu li a:hover::after,
-.nav-menu li a.active::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-.nav-menu li a:hover,
-.nav-menu li a.active {
+.nav-menu li a:hover {
     color: #06b6d4;
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.4); /* Efecto neón sutil al pasar el mouse */
+}
+/* --- 4. ESTRUCTURA GENERAL --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
+.section-padding {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.highlight {
     color: #06b6d4;
-    font-size: 1.8rem;
-    cursor: pointer;
-    z-index: 1002;
 }
 
-/* --- 4. HERO SECTION --- */
+/* --- 5. HERO --- */
 .hero {
     width: 100%;
     min-height: 100vh;
@@ -119,7 +104,6 @@ section, main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
 }
 
 .hero-text h1 {
@@ -128,27 +112,17 @@ section, main {
     margin-bottom: 20px;
 }
 
-.services-list {
+.hero-text p {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 30px;
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 15px;
     flex-wrap: wrap;
-    margin-top: 20px;
 }
 
-.services-list span {
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-}
-
-.services-list i {
-    color: #06b6d4 !important;
-    margin-right: 8px;
-}
-
-/* --- 5. COMPONENTES (BOTONES, CARDS, LOADERS) --- */
+/* --- 6. BOTONES --- */
 .btn-main {
     background: transparent;
     border: 2px solid #06b6d4;
@@ -159,7 +133,6 @@ section, main {
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s;
-    margin-top: 20px;
 }
 
 .btn-main:hover {
@@ -169,11 +142,11 @@ section, main {
     transform: translateY(-3px);
 }
 
+/* --- 7. SERVICIOS --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    padding: 20px;
 }
 
 .service-card {
@@ -186,16 +159,49 @@ section, main {
     transition: 0.3s;
 }
 
+.service-card i {
+    font-size: 2.5rem;
+    color: #06b6d4;
+    margin-bottom: 15px;
+}
+
+.service-content {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(6, 182, 212, 0.2);
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* --- 8. LOADER PORTAFOLIO (CORREGIDO GLOBAL) --- */
+.loader-container {
+    text-align: center;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .tech-loader {
     position: relative;
-    width: 100px; height: 100px;
-    display: flex; align-items: center; justify-content: center;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 25px;
+}
+
+.tech-loader i {
+    font-size: 2.5rem;
+    color: #06b6d4;
+    animation: pulseIcon 2s infinite ease-in-out;
 }
 
 .loader-ring {
     position: absolute;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     border: 3px solid rgba(6, 182, 212, 0.1);
     border-top-color: #06b6d4;
     border-bottom-color: #06b6d4;
@@ -203,93 +209,126 @@ section, main {
     animation: spinRing 1.5s linear infinite;
 }
 
+.loader-text {
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.status-tag {
+    color: #06b6d4;
+    background: rgba(6, 182, 212, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
 @keyframes spinRing { to { transform: rotate(360deg); } }
+@keyframes pulseIcon { 0%, 100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
-/* --- 6. MÓVIL (IPHONE) --- */
+/* --- 9. CONTACTO --- */
+.contact-subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.contact-action {
+    text-align: center;
+}
+
+/* --- 10. MÓVIL --- */
 @media (max-width: 768px) {
-    .nav-main {
-        padding: 15px 25px;
+    .hero {
+        /* Centrado Absoluto Vertical y Horizontal */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; /* Centra verticalmente */
+        align-items: center !important;     /* Centra horizontalmente */
+        
+        min-height: 100dvh !important;      /* Usa el 100% de la pantalla del iPhone */
+        text-align: center !important;
+        padding: 0 !important;              /* Quitamos el padding-top que lo empujaba */
+        margin: 0 !important;
     }
 
-    .nav-brand {
-        font-size: 1.6rem;
+    .hero-text {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
-    .menu-toggle {
-        display: block;
+    .hero-text h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+        padding: 0 20px !important;
+        margin-bottom: 15px !important;
     }
 
+    .hero-text p {
+        font-size: 0.95rem !important;
+        padding: 0 30px !important;
+        margin: 5px 0 !important;
+    }
+}
+
+    /* --- TU MENÚ (MANTENIDO Y OPTIMIZADO) --- */
     .nav-menu {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 75%;
+        width: 80%;
         height: 100vh;
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(15px);
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -10px 0 20px rgba(0,0,0,0.5);
+        z-index: 999;
     }
 
     .nav-menu.active {
         right: 0;
     }
 
-    .nav-menu li {
-        margin: 20px 0;
+    .menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 1000;
+        color: #06b6d4; /* Asegura que el icono sea visible */
+    }
+    
+    .nav-brand {
+        font-size: 1.6rem; /* Achica el logo en el iPhone */
     }
 
-    .nav-menu li a {
-        font-size: 1.4rem;
-        margin: 0;
-    }
 
-    /* CENTRADO TOTAL HERO MÓVIL */
-    .hero {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        min-height: 100dvh !important;
-        padding: 0 20px !important;
-    }
-
-    .hero-text h1 {
-        font-size: 1.8rem !important;
-        line-height: 1.2 !important;
-    }
-
-    .services-list {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .services-list .separator {
-        display: none;
-    }
-}
-
-/* --- 7. MODALES Y NOTIFICACIONES --- */
+/* --- ESTILOS DEL MODAL --- */
 .modal {
     display: none; 
     position: fixed;
-    z-index: 2000;
-    left: 0; top: 0; width: 100%; height: 100%;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0,0,0,0.85);
     backdrop-filter: blur(8px);
 }
 
 .modal-content {
     background: rgba(15, 15, 15, 0.95);
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 40px;
     border: 1px solid rgba(6, 182, 212, 0.3);
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
     position: relative;
     animation: modalAnim 0.4s ease-out;
 }
@@ -299,23 +338,239 @@ section, main {
     to { transform: translateY(0); opacity: 1; }
 }
 
+.close-modal {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    color: #94a3b8;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover { color: #06b6d4; }
+
+/* Estilos del Formulario */
+.form-group { margin-bottom: 20px; }
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #06b6d4;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+option { background: #0a0a0a; color: #fff; }
+
+/* --- NOTIFICACIÓN CENTRADA --- */
 .notification-toast {
     position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+    top: 50%; /* Centrado vertical */
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -50%) scale(0.8); /* Empieza pequeño y centrado */
     background: rgba(10, 10, 10, 0.98);
-    border: 2px solid #06b6d4;
+    border: 2px solid #06b6d4; /* Borde un poco más grueso para que resalte */
     border-radius: 15px;
     padding: 25px 40px;
+    color: white;
+    box-shadow: 0 0 50px rgba(6, 182, 212, 0.5); /* Brillo de ingeniería más fuerte */
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column; /* Icono arriba, texto abajo */
+    align-items: center;
+    gap: 15px;
+    min-width: 300px;
     text-align: center;
 }
 
+/* --- ESTADO ACTIVO --- */
 .notification-toast.show {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1); /* Crece a su tamaño original */
+}
+
+.notification-content i {
+    color: #06b6d4;
+    font-size: 3rem; /* Icono más grande para el centro */
+    margin-bottom: 10px;
+}
+
+.notification-message {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Esto controla el contenedor del logo */
+.nav-brand {
+    font-size: 2.2rem;
+    color: #06b6d4; /* El color cian de tus nodos */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Esto pone el 'DEV' en negrita gruesa */
+.nav-brand b {
+    font-weight: 800;
+}
+
+/* Esto pone el 'STUDIO' en trazo fino */
+.nav-brand span {
+    font-weight: 300;
+}
+
+/* Estilos del botón hamburguesa */
+.menu-toggle {
+    display: none; /* Oculto en PC */
+    background: none;
+    border: none;
+    color: #06b6d4;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Ajustes para móviles (iPhone) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Aparece en móviles */
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Escondido a la derecha */
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        box-shadow: -10px 0 20px rgba(0,0,0,0.5);
+    }
+
+    .nav-menu.active {
+        right: 0; /* Se desliza hacia adentro */
+    }
+
+    .nav-menu li {
+        margin: 25px 0;
+    }
+    
+    .nav-menu li a {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+}
+
+.services-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Importante para móviles */
+    margin-top: 20px;
+}
+
+.services-list span {
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+}
+
+.services-list i {
+    color: #06b6d4 !important; /* El azul cian de DevStudio */
+    margin-right: 8px;
+}
+
+/* Ajuste para que se vea perfecto en tu iPhone */
+@media (max-width: 768px) {
+    .services-list {
+        flex-direction: column; /* Uno debajo del otro en celular */
+        gap: 12px;
+    }
+    .services-list .separator {
+        display: none; /* Quitamos los puntos en móvil */
+    }
+}
+
+/* Reglas especiales para celulares */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem; /* Achica el título principal */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 1rem; /* Achica los subtítulos */
+    }
+
+    /* Ajusta los iconos para que no se amontonen */
+    .hero-content {
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    /* Si tienes un contenedor de servicios, que se pongan uno abajo del otro */
+    .servicios-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Estilo base para los enlaces del menú */
+nav a {
+    text-decoration: none;
+    color: #ffffff; /* Color de tu texto */
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+/* La línea debajo (el truco de la sombra bonita) */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #00d4ff; /* El color cyan de tu logo */
+    transform: scaleX(0); /* Empieza invisible */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+    /* Aquí la sombra de la línea */
+    box-shadow: 0px 0px 8px 1px rgba(0, 212, 255, 0.7); 
+}
+
+/* Efecto al pasar el mouse (PC) */
+nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Clase para la opción seleccionada (Activa) */
+nav a.active::after {
+    transform: scaleX(1);
+}
+
+nav a.active {
+    color: #00d4ff; /* Resalta el texto también */
 }
