@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
                 .then(() => {
-                    mostrarNotificacion("Protocolo completado. El ingeniero lo contactará pronto.");
+                    mostrarNotificacion("Protocolo completado. Un ingeniero lo contactará pronto.");
                     modal.style.display = "none";
                     this.reset();
                 })
