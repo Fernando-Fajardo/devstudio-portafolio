@@ -655,26 +655,34 @@ nav a.active {
     align-items: center;       /* Centra verticalmente en pantalla */
 }
 
+/* --- MODAL DE SERVICIOS (VERSIÓN CORREGIDA Y CENTRADA) --- */
+.service-modal {
+    display: none; /* El JS lo cambiará a 'flex' para mostrarlo */
+    position: fixed;
+    z-index: 3000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Esto centra la tarjeta en el medio exacto de la pantalla */
+    justify-content: center;
+    align-items: center;
+}
+
 .service-modal-content {
-    /* Eliminamos el 'margin: 10vh auto' viejo que lo pegaba arriba */
-    background: rgba(10, 10, 10, 0.95);
-    
-    /* Ajustamos el ancho para que sea más pequeño y compacto */
-    width: 85%;  
-    max-width: 500px; /* Ancho máximo en PC */
-    
-    padding: 50px 30px; /* Más aire arriba y abajo, menos a los lados */
-    
-    /* BORDES REDONDEADOS Y ESTILO TECH (Mantenido) */
+    background: rgba(10, 10, 10, 0.98);
+    width: 85%;
+    max-width: 500px;
+    padding: 50px 30px;
     border: 1px solid rgba(6, 182, 212, 0.4);
-    border-radius: 30px; 
+    border-radius: 30px;
     position: relative;
-    box-shadow: 0 0 35px rgba(6, 182, 212, 0.2);
-    
-    /* ESTILO DE TEXTO: Centrado absoluto del contenido */
-    text-align: center; /* Centra el título y el párrafo */
-    
-    /* Animación de aparición suave y escalado (más premium) */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+    text-align: center; /* Centra el texto internamente */
     animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -685,33 +693,32 @@ nav a.active {
 
 .close-service {
     position: absolute;
-    right: 25px;
-    top: 20px;
+    right: 20px;
+    top: 15px;
     color: #06b6d4;
     font-size: 30px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.close-service:hover { color: #fff; transform: rotate(90deg); }
-
-/* Ajustes de los elementos internos para centrado */
+/* Icono, Título y Párrafo centrados */
 .modal-detail-icon { 
-    font-size: 4.5rem; 
+    font-size: 4rem; 
     color: #06b6d4; 
-    margin-bottom: 25px; 
-    display: block; /* Asegura que el icono flote arriba centrado */
+    margin-bottom: 20px; 
+    display: inline-block; 
 }
+
 .modal-detail-title { 
     font-size: 1.8rem; 
-    margin-bottom: 15px; 
     color: #fff; 
-    font-weight: 600;
+    margin-bottom: 15px; 
+    display: block;
 }
+
 .modal-detail-text { 
     color: #94a3b8; 
     line-height: 1.6; 
-    font-size: 1rem; 
-    max-width: 90%; /* Evita que el texto pegue a los bordes */
-    margin: 0 auto;  /* Centra el bloque de texto en sí */
+    font-size: 1.1rem; 
+    max-width: 90%; 
+    margin: 0 auto;
 }

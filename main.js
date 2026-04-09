@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2 class="modal-detail-title">${title}</h2>
                 <p class="modal-detail-text">${description}</p>
             `;
-            serviceModal.style.display = 'block';
+            serviceModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
     });
