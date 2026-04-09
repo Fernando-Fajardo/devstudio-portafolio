@@ -119,6 +119,29 @@ const cerrarModales = () => {
     document.body.style.overflow = 'auto';
 };
 
+/* --- 6.1 ASIGNACIÓN DE EVENTOS DE CIERRE --- */
+    // 1. Clic en la X del modal de servicios
+    if (closeServiceBtn) {
+        closeServiceBtn.addEventListener('click', cerrarModales);
+    }
+
+    // 2. Clic en la X del modal de consulta
+    if (spanCerrarConsulta) {
+        spanCerrarConsulta.addEventListener('click', cerrarModales);
+    }
+
+    // 3. Clic fuera de los modales (en el fondo oscuro)
+    window.addEventListener('click', (event) => {
+        if (event.target == modalConsulta || event.target == serviceModal) {
+            cerrarModales();
+        }
+    });
+
+    // 4. Tecla Escape para cerrar todo
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") cerrarModales();
+    });
+    
     /* --- 7. ENVÍO DE FORMULARIO CON EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
     if (formConsulta) {
