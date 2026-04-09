@@ -275,16 +275,17 @@ section, main {
 
     /* --- ESTILO TECH/FUTURISTA DEL MENÚ --- */
     /* --- PANEL DEL MENÚ MÁS OSCURO Y PRIVADO --- */
+    /* --- PANEL DEL MENÚ ESTILO 'TARJETA FLOTANTE' REDONDEADA --- */
     .nav-menu {
         position: fixed;
-        top: 0;
-        right: -100%;
-        width: 75%;
-        height: 100vh;
+        top: 2.5dvh; /* Pequeña separación del techo (como el formulario) */
+        right: -110%; /* Escondido un poco más lejos para la animación */
+        width: 85%;  /* Un poco más ancho para que se vea como tarjeta */
+        height: 95dvh; /* No ocupa todo el alto, flota */
         
-        /* Ajuste de oscuridad y desenfoque extremo */
-        background: rgba(5, 5, 5, 0.94) !important; /* Casi negro sólido */
-        backdrop-filter: blur(25px) !important;      /* Desenfoque fuerte: oculta el texto de fondo */
+        /* 1. Oscuridad y desenfoque extremo (mantenido) */
+        background: rgba(5, 5, 5, 0.96) !important;
+        backdrop-filter: blur(25px) !important;
         -webkit-backdrop-filter: blur(25px);
         
         display: flex;
@@ -294,16 +295,24 @@ section, main {
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         
-        /* Borde un poco más definido para separar ambientes */
-        border-left: 1px solid rgba(6, 182, 212, 0.5);
-        padding: 0 20px;
-        box-shadow: -15px 0 30px rgba(0, 0, 0, 0.8);
+        /* 2. BORDES REDONDOS (La clave de lo que pides) */
+        /* Redondea arriba-izquierda y abajo-izquierda */
+        border-radius: 20px 0 0 20px; 
+        
+        /* Borde cyan sutil pero definido en todo el perímetro */
+        border: 1px solid rgba(6, 182, 212, 0.4);
+        border-right: none; /* Quitamos el borde derecho para que pegue si abre al 100% */
+        
+        padding: 40px; /* Más aire por dentro */
+        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.9); /* Sombra más profunda */
     }
 
-    /* Cuando el menú está activo (abierto) */
+    /* Cuando el menú se abre, flotea a su posición */
     .nav-menu.active {
-        right: 0;
+        right: 0; /* Pega al borde derecho de la pantalla */
     }
+
+    
 
     /* Estilo de las listas de enlaces */
     .nav-menu li {
