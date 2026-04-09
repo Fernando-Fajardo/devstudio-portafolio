@@ -75,11 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeServiceBtn = document.querySelector('.close-service');
 
     const serviceDetails = {
-        'Desarrollo Web': 'Creamos sitios modernos, rápidos y optimizados para SEO utilizando las últimas tecnologías como React, Next.js y Node.js.',
-        'E-commerce': 'Tiendas en línea robustas con pasarelas de pago seguras y gestión de inventario intuitiva para escalar tu negocio.',
+        'Desarrollo Web': 'Construimos ecosistemas digitales de alto rendimiento bajo arquitecturas escalables. Implementamos tecnologías de vanguardia como React y Next.js para garantizar velocidad, seguridad avanzada y una experiencia de usuario (UX) de clase mundial orientada a la conversión profesional.',
+        'E-commerce': 'Desarrollamos soluciones transaccionales de alto rendimiento con integración nativa de inventarios, automatización de pedidos y pasarelas de pago blindadas. Nuestros sistemas permiten la gestión omnicanal de stock en tiempo real, asegurando escalabilidad operativa con alta demanda transaccional.',
         'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
-        'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas.',
-        'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia IP con acceso remoto para monitorear tu espacio desde cualquier lugar.',
+        'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas, oficinas, hogares, etc.',
+        'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia con acceso remoto para monitorear tu espacio desde cualquier lugar.',
         'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos de alto tráfico.'
     };
 
