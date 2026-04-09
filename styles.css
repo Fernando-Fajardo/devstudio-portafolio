@@ -274,28 +274,30 @@ section, main {
     }
 
     /* --- ESTILO TECH/FUTURISTA DEL MENÚ --- */
+    /* --- PANEL DEL MENÚ MÁS OSCURO Y PRIVADO --- */
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Sigue escondido a la derecha */
-        width: 70%;  /* Ahora es más estrecho, más elegante */
+        right: -100%;
+        width: 75%;
         height: 100vh;
         
-        /* 1. Efecto Cristal (Semitransparente con Blur) */
-        background: rgba(10, 10, 10, 0.85) !important; /* Negro con opacidad */
-        backdrop-filter: blur(15px) !important; /* Desenfoque del fondo */
-        -webkit-backdrop-filter: blur(15px); /* Soporte para Safari iPhone */
+        /* Ajuste de oscuridad y desenfoque extremo */
+        background: rgba(5, 5, 5, 0.94) !important; /* Casi negro sólido */
+        backdrop-filter: blur(25px) !important;      /* Desenfoque fuerte: oculta el texto de fondo */
+        -webkit-backdrop-filter: blur(25px);
         
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); /* Animación más suave */
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         
-        /* 2. Bordes y Brillo Neón */
-        border-left: 1px solid rgba(6, 182, 212, 0.3); /* Borde cyan muy sutil */
-        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+        /* Borde un poco más definido para separar ambientes */
+        border-left: 1px solid rgba(6, 182, 212, 0.5);
+        padding: 0 20px;
+        box-shadow: -15px 0 30px rgba(0, 0, 0, 0.8);
     }
 
     /* Cuando el menú está activo (abierto) */
