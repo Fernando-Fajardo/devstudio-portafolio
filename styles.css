@@ -447,21 +447,26 @@ option { background: #0a0a0a; color: #fff; }
 /* Ajustes para móviles (iPhone) */
 @media (max-width: 768px) {
     .menu-toggle {
-        display: block; /* Aparece en móviles */
+        display: block; /* Aparece solo en móviles */
+        position: relative;
+        z-index: 1000;
+        color: #06b6d4;
     }
 
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Escondido a la derecha */
-        width: 70%;
+        right: -100%; /* Escondido a la derecha solo en móvil */
+        width: 80%;
         height: 100vh;
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(15px);
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: 0.4s ease-in-out;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
         box-shadow: -10px 0 20px rgba(0,0,0,0.5);
     }
 
@@ -477,7 +482,11 @@ option { background: #0a0a0a; color: #fff; }
         font-size: 1.5rem;
         margin: 0;
     }
-}
+
+    .nav-brand {
+        font-size: 1.6rem; /* Achica el logo en el iPhone */
+    }
+} /* <--- ESTA ES LA ÚNICA LLAVE QUE DEBE IR AQUÍ */
 
 .services-list {
     display: flex;
