@@ -143,4 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 4000);
         }
     }
+
+    
+});
+
+// Seleccionamos todos los enlaces del menú
+const navLinks = document.querySelectorAll('nav a');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        // Quitamos la clase 'active' de todos los enlaces
+        navLinks.forEach(lnk => lnk.classList.remove('active'));
+        // Se la ponemos al que acabamos de cliquear
+        this.classList.add('active');
+    });
 });
