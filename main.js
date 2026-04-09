@@ -99,31 +99,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* --- 6. CIERRE DE MODALES (CORREGIDO) --- */
+    /* --- 6. CIERRE DE MODALES (LIMPIEZA TOTAL) --- */
 const cerrarModales = () => {
-    // 1. Oculta el modal de servicios
+    // 1. Ocultamos el modal de servicios
     if(serviceModal) serviceModal.style.display = "none";
     
-    // 2. Oculta el modal de consulta (si existe)
-    if(typeof modalConsulta !== 'undefined' && modalConsulta) {
-        modalConsulta.style.display = "none";
-    }
+    // 2. Ocultamos el modal de consulta
+    if(modalConsulta) modalConsulta.style.display = "none";
 
-    // 3. ¡ESTA ES LA CLAVE! Oculta el menú móvil si está abierto
-    const navMenu = document.getElementById('nav-menu'); // Asegúrate que este sea el ID de tu menú
+    // 3. ¡IMPORTANTE! Cerramos el menú lateral móvil
+    const navMenu = document.querySelector('.nav-menu'); 
     if(navMenu) {
-        navMenu.classList.remove('show'); // O la clase que uses para abrir el menú
+        navMenu.classList.remove('active'); // Quitamos la clase que lo deja abierto
     }
 
-    // 4. Devuelve el scroll al cuerpo de la página
+    // 4. Resetear el icono del menú (de X a barras)
+    const menuIcon = document.querySelector('#mobile-menu i');
+    if (menuIcon) {
+        menuIcon.classList.add('fa-bars');
+        menuIcon.classList.remove('fa-times');
+    }
+
+    // 5. Devolvemos el scroll a la página
     document.body.style.overflow = 'auto';
 };
 
 /* --- 6.1 ASIGNACIÓN DE EVENTOS DE CIERRE --- */
     // 1. Clic en la X del modal de servicios
     if (closeServiceBtn) {
-        closeServiceBtn.addEventListener('click', cerrarModales);
-    }
+    closeServiceBtn.onclick = cerrarModales;
+}
+
+// Si tienes una X específica para el menú móvil, también conéctala:
+if (menuToggle) {
+    menuToggle.onclick = (e) => {
+        // Si el menú está abierto, lo cerramos con la función general
+        if(navMenu.classList.contains('active')) {
+            cerrarModales();
+        } else {
+            // Si está cerrado, lo abrimos normalmente
+            navMenu.classList.add('active');
+            menuToggle.querySelector('i').classList.replace('fa-bars', 'fa-times');
+        }
+    };
+}
 
     // 2. Clic en la X del modal de consulta
     if (spanCerrarConsulta) {
@@ -141,7 +160,7 @@ const cerrarModales = () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") cerrarModales();
     });
-    
+
     /* --- 7. ENVÍO DE FORMULARIO CON EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
     if (formConsulta) {
