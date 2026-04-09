@@ -273,17 +273,17 @@ section, main {
         margin: 5px 0 !important;
     }
 
-    /* --- ESTILO TECH/FUTURISTA DEL MENÚ --- */
-    /* --- PANEL DEL MENÚ MÁS OSCURO Y PRIVADO --- */
-    /* --- PANEL DEL MENÚ ESTILO 'TARJETA FLOTANTE' REDONDEADA --- */
+    /* --- MENÚ TIPO TARJETA FLOTANTE COMPACTA --- */
     .nav-menu {
         position: fixed;
-        top: 2.5dvh; /* Pequeña separación del techo (como el formulario) */
-        right: -110%; /* Escondido un poco más lejos para la animación */
-        width: 85%;  /* Un poco más ancho para que se vea como tarjeta */
-        height: 95dvh; /* No ocupa todo el alto, flota */
+        /* Lo bajamos un poco y le damos un alto definido */
+        top: 15vh; 
+        height: 70vh; /* Ya no ocupa el 100%, solo el 70% del alto */
         
-        /* 1. Oscuridad y desenfoque extremo (mantenido) */
+        right: -110%; /* Escondido */
+        width: 80%;   /* Ancho de la tarjeta */
+        
+        /* Fondo ultra oscuro y desenfoque pro */
         background: rgba(5, 5, 5, 0.96) !important;
         backdrop-filter: blur(25px) !important;
         -webkit-backdrop-filter: blur(25px);
@@ -295,16 +295,21 @@ section, main {
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         
-        /* 2. BORDES REDONDOS (La clave de lo que pides) */
-        /* Redondea arriba-izquierda y abajo-izquierda */
-        border-radius: 20px 0 0 20px; 
+        /* BORDES REDONDEADOS EN LAS 4 ESQUINAS */
+        border-radius: 30px; 
         
-        /* Borde cyan sutil pero definido en todo el perímetro */
-        border: 1px solid rgba(6, 182, 212, 0.4);
-        border-right: none; /* Quitamos el borde derecho para que pegue si abre al 100% */
+        /* Borde cyan brillante en todo el contorno */
+        border: 1px solid rgba(6, 182, 212, 0.5);
         
-        padding: 40px; /* Más aire por dentro */
-        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.9); /* Sombra más profunda */
+        /* Añadimos un margen a la derecha para que flote totalmente */
+        margin-right: 5%; 
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(6, 182, 212, 0.1);
+    }
+
+    /* Al activarse, se posiciona flotando a la derecha */
+    .nav-menu.active {
+        right: 5%; /* Separado del borde derecho para efecto flotante */
     }
 
     /* Cuando el menú se abre, flotea a su posición */
