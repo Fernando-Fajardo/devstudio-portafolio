@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     /* --- 1. CONFIGURACIÓN DE INICIO Y SCROLL --- */
-    // Forzar el scroll al inicio al recargar la página
     window.scrollTo(0, 0);
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vantaEffect.resize();
     });
 
-    /* --- 3. MENÚ MÓVIL (HAMBURGUESA) --- */
+    /* --- 3. NAVEGACIÓN (MENÚ MÓVIL Y ACTIVE LINKS) --- */
     const menuToggle = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
@@ -42,63 +41,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cerrar menú al tocar cualquier opción (importante para iPhone)
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', function() {
+            // Cerrar menú móvil
             navMenu.classList.remove('active');
-            const icon = menuToggle.querySelector('i');
+            const icon = menuToggle?.querySelector('i');
             if (icon) {
                 icon.classList.add('fa-bars');
                 icon.classList.remove('fa-times');
             }
+            // Marcar link como activo
+            navLinks.forEach(lnk => lnk.classList.remove('active'));
+            this.classList.add('active');
         });
     });
 
-    /* --- 4. ACORDEÓN DE SERVICIOS --- */
-    const detalles = document.querySelectorAll("details");
-    detalles.forEach((targetDetail) => {
-        targetDetail.addEventListener("click", () => {
-            detalles.forEach((detail) => {
-                if (detail !== targetDetail) {
-                    detail.removeAttribute("open");
-                }
-            });
-        });
-    });
+    /* --- 4. LÓGICA DEL MODAL DE CONSULTORÍA (PROYECTOS) --- */
+    const modalConsulta = document.getElementById("modal-consulta");
+    const btnAbrirConsulta = document.getElementById("btn-iniciar-proyecto");
+    const spanCerrarConsulta = document.querySelector(".close-modal");
 
-    /* --- 5. LÓGICA DEL MODAL DE CONSULTORÍA --- */
-    const modal = document.getElementById("modal-consulta");
-    const btnAbrir = document.getElementById("btn-iniciar-proyecto");
-    const spanCerrar = document.querySelector(".close-modal");
-
-    if (btnAbrir) {
-        btnAbrir.onclick = function(e) {
+    if (btnAbrirConsulta) {
+        btnAbrirConsulta.onclick = (e) => {
             e.preventDefault();
-            modal.style.display = "block";
+            modalConsulta.style.display = "block";
+            document.body.style.overflow = 'hidden';
         }
     }
 
-    if (spanCerrar) {
-        spanCerrar.onclick = function() {
-            modal.style.display = "none";
-        }
-    }
+    /* --- 5. LÓGICA DEL MODAL DE SERVICIOS (DETALLES) --- */
+    const serviceModal = document.getElementById('service-modal');
+    const modalBody = document.getElementById('modal-body-content');
+    const closeServiceBtn = document.querySelector('.close-service');
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    const serviceDetails = {
+        'Desarrollo Web': 'Creamos sitios modernos, rápidos y optimizados para SEO utilizando las últimas tecnologías como React, Next.js y Node.js.',
+        'E-commerce': 'Tiendas en línea robustas con pasarelas de pago seguras y gestión de inventario intuitiva para escalar tu negocio.',
+        'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
+        'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas.',
+        'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia IP con acceso remoto para monitorear tu espacio desde cualquier lugar.',
+        'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos de alto tráfico.'
+    };
 
-    /* --- 6. ENVÍO DE FORMULARIO CON EMAILJS --- */
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.querySelector('h3').innerText;
+            const iconClass = card.querySelector('i').className;
+            const description = serviceDetails[title] || 'Detalles técnicos próximamente...';
+
+            modalBody.innerHTML = `
+                <i class="${iconClass} modal-detail-icon"></i>
+                <h2 class="modal-detail-title">${title}</h2>
+                <p class="modal-detail-text">${description}</p>
+            `;
+            serviceModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    /* --- 6. CIERRE DE MODALES (GENERAL) --- */
+    const cerrarModales = () => {
+        if(modalConsulta) modalConsulta.style.display = "none";
+        if(serviceModal) serviceModal.style.display = "none";
+        document.body.style.overflow = 'auto';
+    };
+
+    if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarModales;
+    if (closeServiceBtn) closeServiceBtn.onclick = cerrarModales;
+
+    window.onclick = (event) => {
+        if (event.target == modalConsulta || event.target == serviceModal) {
+            cerrarModales();
+        }
+    };
+
+    /* --- 7. ENVÍO DE FORMULARIO CON EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
     if (formConsulta) {
         formConsulta.onsubmit = function(e) {
             e.preventDefault();
-            
             const btn = this.querySelector("button");
             const originalText = btn.innerText;
-            
             btn.innerText = "Sincronizando Protocolos...";
             btn.disabled = true;
 
@@ -109,13 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: this.querySelector('textarea').value
             };
 
-            const SERVICE_ID = 'service_ar841iy'; 
-            const TEMPLATE_ID = 'template_tzb6m1k';
-
-            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+            emailjs.send('service_ar841iy', 'template_tzb6m1k', templateParams)
                 .then(() => {
                     mostrarNotificacion("Protocolo completado. Un ingeniero lo contactará pronto.");
-                    modal.style.display = "none";
+                    cerrarModales();
                     this.reset();
                 })
                 .catch((error) => {
@@ -126,80 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.innerText = originalText;
                     btn.disabled = false;
                 });
-        }
+        };
     }
 
-    /* --- 7. SISTEMA DE NOTIFICACIONES (TOAST) --- */
     function mostrarNotificacion(mensaje) {
         const toast = document.getElementById("custom-notification");
         const msgElem = document.getElementById("notification-message");
-        
         if (toast && msgElem) {
             msgElem.innerText = mensaje;
             toast.classList.add("show");
-
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 4000);
+            setTimeout(() => toast.classList.remove("show"), 4000);
         }
     }
-
-    
 });
-
-// Seleccionamos todos los enlaces del menú
-const navLinks = document.querySelectorAll('nav a');
-
-navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        // Quitamos la clase 'active' de todos los enlaces
-        navLinks.forEach(lnk => lnk.classList.remove('active'));
-        // Se la ponemos al que acabamos de cliquear
-        this.classList.add('active');
-    });
-});
-
-// Datos de los servicios (puedes ampliar las descripciones aquí)
-const serviceDetails = {
-    'Desarrollo Web': 'Creamos sitios modernos, rápidos y optimizados para SEO utilizando las últimas tecnologías como React, Next.js y Node.js.',
-    'E-commerce': 'Tiendas en línea robustas con pasarelas de pago seguras y gestión de inventario intuitiva para escalar tu negocio.',
-    'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
-    'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas.',
-    'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia IP con acceso remoto para monitorear tu espacio desde cualquier lugar.',
-    'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos de alto tráfico.'
-};
-
-const modal = document.getElementById('service-modal');
-const modalBody = document.getElementById('modal-body-content');
-const closeBtn = document.querySelector('.close-service');
-
-// Asignar el evento click a cada tarjeta
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const title = card.querySelector('h3').innerText;
-        const iconClass = card.querySelector('i').className;
-        const description = serviceDetails[title] || 'Detalles próximamente...';
-
-        modalBody.innerHTML = `
-            <i class="${iconClass} modal-detail-icon"></i>
-            <h2 class="modal-detail-title">${title}</h2>
-            <p class="modal-detail-text">${description}</p>
-        `;
-        
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Bloquea el scroll de fondo
-    });
-});
-
-// Cerrar al click en la X o fuera del modal
-closeBtn.onclick = () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-};
-
-window.onclick = (event) => {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-};
