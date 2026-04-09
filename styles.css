@@ -273,17 +273,19 @@ section, main {
         margin: 5px 0 !important;
     }
 
-    /* --- MENÚ TIPO TARJETA FLOTANTE COMPACTA --- */
+    /* --- MENÚ TIPO TARJETA MINI (COMPACTA) --- */
     .nav-menu {
         position: fixed;
-        /* Lo bajamos un poco y le damos un alto definido */
-        top: 15vh; 
-        height: 70vh; /* Ya no ocupa el 100%, solo el 70% del alto */
+        /* Bajamos el menú para que flote más cerca del centro */
+        top: 20vh; 
         
-        right: -110%; /* Escondido */
-        width: 80%;   /* Ancho de la tarjeta */
+        /* Ajustamos el alto a 'auto' o un valor pequeño para que no sobre espacio */
+        height: auto; 
+        min-height: 350px; /* Altura mínima para que respire */
         
-        /* Fondo ultra oscuro y desenfoque pro */
+        right: -110%; 
+        width: 75%;   /* Un poco más angosto para que se vea más 'tarjeta' */
+        
         background: rgba(5, 5, 5, 0.96) !important;
         backdrop-filter: blur(25px) !important;
         -webkit-backdrop-filter: blur(25px);
@@ -295,21 +297,18 @@ section, main {
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         
-        /* BORDES REDONDEADOS EN LAS 4 ESQUINAS */
+        /* Bordes redondeados perfectos */
         border-radius: 30px; 
-        
-        /* Borde cyan brillante en todo el contorno */
         border: 1px solid rgba(6, 182, 212, 0.5);
         
-        /* Añadimos un margen a la derecha para que flote totalmente */
-        margin-right: 5%; 
-        padding: 30px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(6, 182, 212, 0.1);
+        /* Espaciado interno para que los botones no peguen a los bordes */
+        padding: 40px 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
     }
 
-    /* Al activarse, se posiciona flotando a la derecha */
+    /* Al activarse, flota centrado a la derecha */
     .nav-menu.active {
-        right: 5%; /* Separado del borde derecho para efecto flotante */
+        right: 5%; 
     }
 
     /* Cuando el menú se abre, flotea a su posición */
