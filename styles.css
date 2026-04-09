@@ -706,20 +706,7 @@ nav a.active {
     z-index: 10;
 }
 
-/* Estilos de los elementos internos */
-.modal-detail-icon { 
-    font-size: 4rem; 
-    color: #06b6d4; 
-    margin-bottom: 20px;
-}
-.modal-detail-title { 
-    font-size: 1.8rem; 
-    color: #fff; 
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-.modal-detail-text { 
-    color: #94a3b8; 
-    font-size: 1.1rem; 
-    line-height: 1.6;
-}
+/* Estilo interno del contenido del modal */
+.modal-detail-icon { font-size: 4rem; color: #06b6d4; margin-bottom: 20px; }
+.modal-detail-title { font-size: 2rem; margin-bottom: 15px; color: #fff; }
+.modal-detail-text { color: #94a3b8; line-height: 1.6; font-size: 1.1rem; }
