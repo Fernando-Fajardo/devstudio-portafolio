@@ -274,37 +274,7 @@ section, main {
     }
 }
 
-    /* --- TU MENÚ (MANTENIDO Y OPTIMIZADO) --- */
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        height: 100vh;
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(15px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 999;
-    }
-
-    .nav-menu.active {
-        right: 0;
-    }
-
-    .menu-toggle {
-        display: block;
-        position: relative;
-        z-index: 1000;
-        color: #06b6d4; /* Asegura que el icono sea visible */
-    }
     
-    .nav-brand {
-        font-size: 1.6rem; /* Achica el logo en el iPhone */
-    }
 
 
 /* --- ESTILOS DEL MODAL --- */
