@@ -158,3 +158,48 @@ navLinks.forEach(link => {
         this.classList.add('active');
     });
 });
+
+// Datos de los servicios (puedes ampliar las descripciones aquí)
+const serviceDetails = {
+    'Desarrollo Web': 'Creamos sitios modernos, rápidos y optimizados para SEO utilizando las últimas tecnologías como React, Next.js y Node.js.',
+    'E-commerce': 'Tiendas en línea robustas con pasarelas de pago seguras y gestión de inventario intuitiva para escalar tu negocio.',
+    'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
+    'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas.',
+    'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia IP con acceso remoto para monitorear tu espacio desde cualquier lugar.',
+    'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos de alto tráfico.'
+};
+
+const modal = document.getElementById('service-modal');
+const modalBody = document.getElementById('modal-body-content');
+const closeBtn = document.querySelector('.close-service');
+
+// Asignar el evento click a cada tarjeta
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const title = card.querySelector('h3').innerText;
+        const iconClass = card.querySelector('i').className;
+        const description = serviceDetails[title] || 'Detalles próximamente...';
+
+        modalBody.innerHTML = `
+            <i class="${iconClass} modal-detail-icon"></i>
+            <h2 class="modal-detail-title">${title}</h2>
+            <p class="modal-detail-text">${description}</p>
+        `;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Bloquea el scroll de fondo
+    });
+});
+
+// Cerrar al click en la X o fuera del modal
+closeBtn.onclick = () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+};
+
+window.onclick = (event) => {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+};

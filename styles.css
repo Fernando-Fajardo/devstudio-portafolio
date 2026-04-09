@@ -633,3 +633,48 @@ nav a.active::after {
 nav a.active {
     color: #00d4ff; /* Resalta el texto también */
 }
+
+/* --- MODAL DE SERVICIOS (FLOTANTE) --- */
+.service-modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; /* Por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+}
+
+.service-modal-content {
+    background: rgba(10, 10, 10, 0.95);
+    margin: 10vh auto;
+    padding: 40px;
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    width: 90%;
+    max-width: 600px;
+    border-radius: 30px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+    animation: modalSlideUp 0.4s ease;
+}
+
+@keyframes modalSlideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-service {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    color: #06b6d4;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+/* Estilo interno del contenido del modal */
+.modal-detail-icon { font-size: 4rem; color: #06b6d4; margin-bottom: 20px; }
+.modal-detail-title { font-size: 2rem; margin-bottom: 15px; color: #fff; }
+.modal-detail-text { color: #94a3b8; line-height: 1.6; font-size: 1.1rem; }
