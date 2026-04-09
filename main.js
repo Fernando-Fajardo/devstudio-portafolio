@@ -27,32 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
         vantaEffect.resize();
     });
 
-    /* --- 3. NAVEGACIÓN (MENÚ MÓVIL Y ACTIVE LINKS) --- */
+   /* --- 3. NAVEGACIÓN (MENÚ MÓVIL Y ACTIVE LINKS) --- */
     const menuToggle = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
 
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que el clic se propague al window
             navMenu.classList.toggle('active');
+            
             const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
         });
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Cerrar menú móvil
-            navMenu.classList.remove('active');
-            const icon = menuToggle?.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-            // Marcar link como activo
-            navLinks.forEach(lnk => lnk.classList.remove('active'));
-            this.classList.add('active');
+        link.addEventListener('click', () => {
+            cerrarModales(); // Usamos la función general para limpiar todo al navegar
         });
     });
 
@@ -99,30 +94,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* --- 6. CIERRE DE MODALES (LIMPIEZA TOTAL) --- */
-const cerrarModales = () => {
-    // 1. Ocultamos el modal de servicios
-    if(serviceModal) serviceModal.style.display = "none";
-    
-    // 2. Ocultamos el modal de consulta
-    if(modalConsulta) modalConsulta.style.display = "none";
+   /* --- 6. CIERRE DE MODALES (LIMPIEZA TOTAL) --- */
+    const cerrarModales = () => {
+        // 1. Ocultar Modales
+        if(serviceModal) serviceModal.style.display = "none";
+        if(modalConsulta) modalConsulta.style.display = "none";
 
-    // 3. ¡IMPORTANTE! Cerramos el menú lateral móvil
-    const navMenu = document.querySelector('.nav-menu'); 
-    if(navMenu) {
-        navMenu.classList.remove('active'); // Quitamos la clase que lo deja abierto
-    }
+        // 2. Ocultar Menú Móvil
+        const navMenu = document.querySelector('.nav-menu');
+        if(navMenu) {
+            navMenu.classList.remove('active'); // Quitamos la clase que lo despliega
+        }
 
-    // 4. Resetear el icono del menú (de X a barras)
-    const menuIcon = document.querySelector('#mobile-menu i');
-    if (menuIcon) {
-        menuIcon.classList.add('fa-bars');
-        menuIcon.classList.remove('fa-times');
-    }
+        // 3. Resetear Icono del Menú a "barras"
+        const menuIcon = document.querySelector('#mobile-menu i');
+        if (menuIcon) {
+            menuIcon.classList.add('fa-bars');
+            menuIcon.classList.remove('fa-times');
+        }
 
-    // 5. Devolvemos el scroll a la página
-    document.body.style.overflow = 'auto';
-};
+        // 4. Habilitar Scroll
+        document.body.style.overflow = 'auto';
+    };
+
+    // Asignar eventos a los botones X
+    if (closeServiceBtn) closeServiceBtn.onclick = cerrarModales;
+    if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarModales;
+
+    // Clic fuera para cerrar
+    window.addEventListener('click', (event) => {
+        // Si el menú está abierto y clicamos fuera, cerramos todo
+        if (event.target == modalConsulta || event.target == serviceModal) {
+            cerrarModales();
+        }
+    });
 
 /* --- 6.1 ASIGNACIÓN DE EVENTOS DE CIERRE --- */
     // 1. Clic en la X del modal de servicios
