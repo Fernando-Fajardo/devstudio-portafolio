@@ -99,21 +99,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* --- 6. CIERRE DE MODALES (GENERAL) --- */
-    const cerrarModales = () => {
-        if(modalConsulta) modalConsulta.style.display = "none";
-        if(serviceModal) serviceModal.style.display = "none";
-        document.body.style.overflow = 'auto';
-    };
+    /* --- 6. CIERRE DE MODALES (CORREGIDO) --- */
+const cerrarModales = () => {
+    // 1. Oculta el modal de servicios
+    if(serviceModal) serviceModal.style.display = "none";
+    
+    // 2. Oculta el modal de consulta (si existe)
+    if(typeof modalConsulta !== 'undefined' && modalConsulta) {
+        modalConsulta.style.display = "none";
+    }
 
-    if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarModales;
-    if (closeServiceBtn) closeServiceBtn.onclick = cerrarModales;
+    // 3. ¡ESTA ES LA CLAVE! Oculta el menú móvil si está abierto
+    const navMenu = document.getElementById('nav-menu'); // Asegúrate que este sea el ID de tu menú
+    if(navMenu) {
+        navMenu.classList.remove('show'); // O la clase que uses para abrir el menú
+    }
 
-    window.onclick = (event) => {
-        if (event.target == modalConsulta || event.target == serviceModal) {
-            cerrarModales();
-        }
-    };
+    // 4. Devuelve el scroll al cuerpo de la página
+    document.body.style.overflow = 'auto';
+};
 
     /* --- 7. ENVÍO DE FORMULARIO CON EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
