@@ -1,88 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    /* --- 1. CONFIGURACIÓN DE INICIO Y SCROLL --- */
+    /* --- 1. CONFIGURACIÓN DE INICIO --- */
     window.scrollTo(0, 0);
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    /* --- 2. FONDO ANIMADO (VANTA.JS) --- */
+    /* --- 2. FONDO ANIMADO --- */
     const vantaEffect = VANTA.NET({
         el: "#animated-bg",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: window.innerHeight,
-        minWidth: window.innerWidth,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x06b6d4,
-        backgroundColor: 0x0a0a0a,
-        points: 10.00,
-        maxDistance: 20.00,
-        spacing: 16.00
+        mouseControls: true, touchControls: true,
+        minHeight: window.innerHeight, minWidth: window.innerWidth,
+        scale: 1.00, scaleMobile: 1.00,
+        color: 0x06b6d4, backgroundColor: 0x0a0a0a,
+        points: 10.00, maxDistance: 20.00, spacing: 16.00
     });
+    window.addEventListener('resize', () => vantaEffect.resize());
 
-    window.addEventListener('resize', () => {
-        vantaEffect.resize();
-    });
-
-   /* --- 3. NAVEGACIÓN (MENÚ MÓVIL Y ACTIVE LINKS) --- */
+    /* --- 3. VARIABLES PRINCIPALES --- */
     const menuToggle = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
+    const serviceModal = document.getElementById('service-modal');
+    const modalConsulta = document.getElementById("modal-consulta");
+    const modalBody = document.getElementById('modal-body-content');
+    const closeServiceBtn = document.querySelector('.close-service');
+    const spanCerrarConsulta = document.querySelector(".close-modal");
 
-    if (menuToggle) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que el clic se propague al window
-            navMenu.classList.toggle('active');
-            
-            const icon = menuToggle.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
+    /* --- 4. FUNCIÓN UNIFICADA DE CIERRE --- */
+    const cerrarTodo = () => {
+        if(serviceModal) serviceModal.style.display = "none";
+        if(modalConsulta) modalConsulta.style.display = "none";
+        if(navMenu) navMenu.classList.remove('active');
+        
+        const icon = menuToggle?.querySelector('i');
+        if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        }
+        document.body.style.overflow = 'auto';
+    };
+
+    /* --- 5. LÓGICA DEL MENÚ MÓVIL --- */
+    if (menuToggle && navMenu) {
+        menuToggle.onclick = (e) => {
+            e.stopPropagation();
+            const isOpen = navMenu.classList.contains('active');
+            if (isOpen) {
+                cerrarTodo();
+            } else {
+                navMenu.classList.add('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.replace('fa-bars', 'fa-times');
             }
-        });
+        };
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            cerrarModales(); // Usamos la función general para limpiar todo al navegar
-        });
+        link.onclick = () => cerrarTodo();
     });
 
-    /* --- 4. LÓGICA DEL MODAL DE CONSULTORÍA (PROYECTOS) --- */
-    const modalConsulta = document.getElementById("modal-consulta");
-    const btnAbrirConsulta = document.getElementById("btn-iniciar-proyecto");
-    const spanCerrarConsulta = document.querySelector(".close-modal");
-
-    if (btnAbrirConsulta) {
-        btnAbrirConsulta.onclick = (e) => {
-            e.preventDefault();
-            modalConsulta.style.display = "block";
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    /* --- 5. LÓGICA DEL MODAL DE SERVICIOS (DETALLES) --- */
-    const serviceModal = document.getElementById('service-modal');
-    const modalBody = document.getElementById('modal-body-content');
-    const closeServiceBtn = document.querySelector('.close-service');
-
+    /* --- 6. MODAL DE SERVICIOS --- */
     const serviceDetails = {
         'Desarrollo Web': 'Construimos ecosistemas digitales de alto rendimiento bajo arquitecturas escalables. Implementamos tecnologías de vanguardia para garantizar velocidad, seguridad avanzada y una experiencia de usuario (UX) de clase mundial orientada a la conversión profesional.',
         'E-commerce': 'Desarrollamos soluciones transaccionales de alto rendimiento con integración nativa de inventarios, automatización de pedidos y pasarelas de pago blindadas. Nuestros sistemas permiten la gestión omnicanal de stock en tiempo real, asegurando escalabilidad operativa con alta demanda transaccional.',
         'Gestión Académica (SIS)': 'Sistemas integrales para instituciones educativas: control de notas, asistencia y comunicación con padres.',
-        'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas, oficinas, hogares, etc.',
-        'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia con acceso remoto para monitorear tu espacio desde cualquier lugar.',
-        'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos de alto tráfico.'
+        'Infraestructura de Redes': 'Diseño y montaje de redes estructuradas, asegurando conectividad estable y segura para empresas, oficinas y centros de datos.',
+        'Cámaras de Seguridad': 'Instalación de sistemas de vigilancia avanzada con acceso remoto y almacenamiento cifrado para monitoreo integral.',
+        'Puntos de Acceso (AP)': 'Optimización de cobertura Wi-Fi mediante puntos de acceso de alta densidad para entornos corporativos de alto tráfico.'
     };
 
     document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('click', () => {
+        card.onclick = () => {
             const title = card.querySelector('h3').innerText;
             const iconClass = card.querySelector('i').className;
-            const description = serviceDetails[title] || 'Detalles técnicos próximamente...';
+            const description = serviceDetails[title] || 'Consultoría técnica disponible bajo demanda.';
 
             modalBody.innerHTML = `
                 <i class="${iconClass} modal-detail-icon"></i>
@@ -91,82 +81,32 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             serviceModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-        });
+        };
     });
 
-   /* --- 6. CIERRE DE MODALES (LIMPIEZA TOTAL) --- */
-    const cerrarModales = () => {
-        // 1. Ocultar Modales
-        if(serviceModal) serviceModal.style.display = "none";
-        if(modalConsulta) modalConsulta.style.display = "none";
-
-        // 2. Ocultar Menú Móvil
-        const navMenu = document.querySelector('.nav-menu');
-        if(navMenu) {
-            navMenu.classList.remove('active'); // Quitamos la clase que lo despliega
-        }
-
-        // 3. Resetear Icono del Menú a "barras"
-        const menuIcon = document.querySelector('#mobile-menu i');
-        if (menuIcon) {
-            menuIcon.classList.add('fa-bars');
-            menuIcon.classList.remove('fa-times');
-        }
-
-        // 4. Habilitar Scroll
-        document.body.style.overflow = 'auto';
-    };
-
-    // Asignar eventos a los botones X
-    if (closeServiceBtn) closeServiceBtn.onclick = cerrarModales;
-    if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarModales;
-
-    // Clic fuera para cerrar
-    window.addEventListener('click', (event) => {
-        // Si el menú está abierto y clicamos fuera, cerramos todo
-        if (event.target == modalConsulta || event.target == serviceModal) {
-            cerrarModales();
-        }
-    });
-
-/* --- 6.1 ASIGNACIÓN DE EVENTOS DE CIERRE --- */
-    // 1. Clic en la X del modal de servicios
-    if (closeServiceBtn) {
-    closeServiceBtn.onclick = cerrarModales;
-}
-
-// Si tienes una X específica para el menú móvil, también conéctala:
-if (menuToggle) {
-    menuToggle.onclick = (e) => {
-        // Si el menú está abierto, lo cerramos con la función general
-        if(navMenu.classList.contains('active')) {
-            cerrarModales();
-        } else {
-            // Si está cerrado, lo abrimos normalmente
-            navMenu.classList.add('active');
-            menuToggle.querySelector('i').classList.replace('fa-bars', 'fa-times');
-        }
-    };
-}
-
-    // 2. Clic en la X del modal de consulta
-    if (spanCerrarConsulta) {
-        spanCerrarConsulta.addEventListener('click', cerrarModales);
+    /* --- 7. MODAL DE CONSULTORÍA --- */
+    const btnAbrirConsulta = document.getElementById("btn-iniciar-proyecto");
+    if (btnAbrirConsulta) {
+        btnAbrirConsulta.onclick = (e) => {
+            e.preventDefault();
+            modalConsulta.style.display = "block";
+            document.body.style.overflow = 'hidden';
+        };
     }
 
-    // 3. Clic fuera de los modales (en el fondo oscuro)
-    window.addEventListener('click', (event) => {
-        if (event.target == modalConsulta || event.target == serviceModal) {
-            cerrarModales();
-        }
-    });
+    /* --- 8. ASIGNACIÓN DE CIERRES --- */
+    if (closeServiceBtn) closeServiceBtn.onclick = cerrarTodo;
+    if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarTodo;
 
-    // 4. Tecla Escape para cerrar todo
-    document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") cerrarModales();
-    });
+    window.onclick = (e) => {
+        if (e.target == modalConsulta || e.target == serviceModal) cerrarTodo();
+    };
 
-    /* --- 7. ENVÍO DE FORMULARIO CON EMAILJS --- */
+    document.onkeydown = (e) => {
+        if (e.key === "Escape") cerrarTodo();
+    };
+
+    /* --- 9. FORMULARIO EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
     if (formConsulta) {
         formConsulta.onsubmit = function(e) {
@@ -186,7 +126,7 @@ if (menuToggle) {
             emailjs.send('service_ar841iy', 'template_tzb6m1k', templateParams)
                 .then(() => {
                     mostrarNotificacion("Protocolo completado. Un ingeniero lo contactará pronto.");
-                    cerrarModales();
+                    cerrarTodo();
                     this.reset();
                 })
                 .catch((error) => {
