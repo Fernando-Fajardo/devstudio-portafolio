@@ -634,47 +634,84 @@ nav a.active {
     color: #00d4ff; /* Resalta el texto también */
 }
 
-/* --- MODAL DE SERVICIOS (FLOTANTE) --- */
+/* --- MODAL DE SERVICIOS (CENTRADO ABSOLUTO) --- */
 .service-modal {
     display: none; 
     position: fixed;
-    z-index: 2000; /* Por encima de todo */
+    z-index: 2000; /* Asegúrate de que esté sobre el menú si abren ambos */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
+    
+    /* Fondo oscuro y desenfoque pro (Mantenido y mejorado) */
+    background: rgba(0, 0, 0, 0.88) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px); /* Soporte para Safari iPhone */
+    
+    /* FLEXBOX ES LA CLAVE PARA CENTRAR EN PANTALLA */
+    display: flex !important; /* Activamos flexbox */
+    justify-content: center;   /* Centra horizontalmente en pantalla */
+    align-items: center;       /* Centra verticalmente en pantalla */
 }
 
 .service-modal-content {
+    /* Eliminamos el 'margin: 10vh auto' viejo que lo pegaba arriba */
     background: rgba(10, 10, 10, 0.95);
-    margin: 10vh auto;
-    padding: 40px;
+    
+    /* Ajustamos el ancho para que sea más pequeño y compacto */
+    width: 85%;  
+    max-width: 500px; /* Ancho máximo en PC */
+    
+    padding: 50px 30px; /* Más aire arriba y abajo, menos a los lados */
+    
+    /* BORDES REDONDEADOS Y ESTILO TECH (Mantenido) */
     border: 1px solid rgba(6, 182, 212, 0.4);
-    width: 90%;
-    max-width: 600px;
-    border-radius: 30px;
+    border-radius: 30px; 
     position: relative;
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
-    animation: modalSlideUp 0.4s ease;
+    box-shadow: 0 0 35px rgba(6, 182, 212, 0.2);
+    
+    /* ESTILO DE TEXTO: Centrado absoluto del contenido */
+    text-align: center; /* Centra el título y el párrafo */
+    
+    /* Animación de aparición suave y escalado (más premium) */
+    animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes modalSlideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes modalPopIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .close-service {
     position: absolute;
     right: 25px;
-    top: 15px;
+    top: 20px;
     color: #06b6d4;
-    font-size: 35px;
+    font-size: 30px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* Estilo interno del contenido del modal */
-.modal-detail-icon { font-size: 4rem; color: #06b6d4; margin-bottom: 20px; }
-.modal-detail-title { font-size: 2rem; margin-bottom: 15px; color: #fff; }
-.modal-detail-text { color: #94a3b8; line-height: 1.6; font-size: 1.1rem; }
+.close-service:hover { color: #fff; transform: rotate(90deg); }
+
+/* Ajustes de los elementos internos para centrado */
+.modal-detail-icon { 
+    font-size: 4.5rem; 
+    color: #06b6d4; 
+    margin-bottom: 25px; 
+    display: block; /* Asegura que el icono flote arriba centrado */
+}
+.modal-detail-title { 
+    font-size: 1.8rem; 
+    margin-bottom: 15px; 
+    color: #fff; 
+    font-weight: 600;
+}
+.modal-detail-text { 
+    color: #94a3b8; 
+    line-height: 1.6; 
+    font-size: 1rem; 
+    max-width: 90%; /* Evita que el texto pegue a los bordes */
+    margin: 0 auto;  /* Centra el bloque de texto en sí */
+}
