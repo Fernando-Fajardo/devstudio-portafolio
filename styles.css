@@ -142,6 +142,13 @@ section, main {
     transform: translateY(-3px);
 }
 
+/* --- 7. SERVICIOS --- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
 /* --- 7. SERVICIOS (CON BORDES ANIMADOS INFINITOS) --- */
 .service-card {
     position: relative;
