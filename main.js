@@ -149,4 +149,29 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => toast.classList.remove("show"), 4000);
         }
     }
+
+    /* --- 10. NAVEGACIÓN LIMPIA --- */
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // Si el enlace es un ancla (empieza con #)
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Calculamos la posición exacta
+                    const offsetTop = targetSection.offsetTop;
+
+                    // Hacemos el scroll manualmente para asegurar precisión
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+                cerrarTodo(); // Cierra el menú móvil si estuviera abierto
+            }
+        });
+    });
 });

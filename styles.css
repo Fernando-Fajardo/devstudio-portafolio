@@ -82,18 +82,23 @@ section, main {
     padding: 0 20px;
 }
 
-.section-padding {
-    padding: 100px 0;
+/* MODIFICACIÓN: Secciones como páginas independientes */
+section {
+    min-height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center;
+    position: relative;
+    padding: 100px 0; /* Espacio para el menú superior */
+    box-sizing: border-box;
 }
 
 .section-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
-}
-
-.highlight {
-    color: #06b6d4;
 }
 
 /* --- 5. HERO --- */
