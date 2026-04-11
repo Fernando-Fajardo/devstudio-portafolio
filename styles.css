@@ -142,7 +142,7 @@ section, main {
     transform: translateY(-3px);
 }
 
-/* --- 7. SERVICIOS (BORDE ANIMADO LIMPIO Y NOTORIO) --- */
+/* --- 7. SERVICIOS (BORDES ANIMADOS EN MOVIMIENTO PERMANENTE) --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -150,107 +150,87 @@ section, main {
 }
 
 .service-card {
-    /* Mantenemos tu fondo y estilos originales INTACTOS */
+    /* Mantenemos tu fondo y diseño original */
     background: rgba(255, 255, 255, 0.03);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
     backdrop-filter: blur(5px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el hover */
+    transition: transform 0.3s ease;
     
-    /* ESTO ES CRUCIAL */
-    position: relative; /* Para posicionar el borde animado */
-    z-index: 1; /* Para que el contenido esté por encima */
-    border: 1px solid transparent; /* Quitamos tu borde fijo original para usar el animado */
+    position: relative; 
+    z-index: 1;
+    /* Eliminamos el borde sólido para que no interfiera con la luz */
+    border: none; 
+    overflow: hidden;
 }
 
-/* El pseudo-elemento que crea el borde animado */
+/* El haz de luz que recorre el borde */
 .service-card::before {
     content: '';
     position: absolute;
-    /* Usamos inset negativo para que el borde se posicione JUSTO sobre el contorno */
-    inset: -1px; /* grosor del borde */
-    border-radius: 16px; /* Ligeramente mayor que el card para que encaje perfecto */
-    padding: 2px; /* Grosor visual del borde animado, ajústalo aquí si quieres que se note más */
+    /* Creamos un área mayor para que al rotar cubra las esquinas */
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
     
-    /* Gradiente cónico con el color cian para el efecto de movimiento */
+    /* Gradiente cónico: Ajusta el 40% si quieres que la estela de luz sea más corta o larga */
     background: conic-gradient(
         from 0deg,
         transparent 0%,
-        #06b6d4 15%, /* Punto de luz cian */
-        transparent 30%,
+        #06b6d4 10%, 
+        #06b6d4 20%, /* El color brilla más en este tramo */
+        transparent 40%,
         transparent 100%
     );
     
-    /* Máscara para que solo se vea el borde */
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    
-    /* Animación infinita */
-    animation: rotateBorderLimpid 4s linear infinite;
-    
-    /* Control de visibilidad */
-    opacity: 0; /* Oculto por defecto */
-    transition: opacity 0.3s ease;
-    z-index: -1; /* Detrás del contenido */
+    /* ANIMACIÓN: 3 segundos para que sea rápido y notorio */
+    animation: rotateAlways 3s linear infinite;
+    z-index: -2;
 }
 
-/* Al pasar el mouse, mostramos el borde animado */
-.service-card:hover::before {
-    opacity: 1;
+/* Esta capa es la que "tapa" el centro para que solo se vea el borde */
+.service-card::after {
+    content: '';
+    position: absolute;
+    /* El inset de 1.5px define el grosor de la línea de luz */
+    inset: 1.5px; 
+    background: #0a0a0a; /* Color de fondo oscuro para que resalte la luz */
+    border-radius: 14px;
+    z-index: -1;
+    /* Mantenemos la opacidad de tu diseño original */
+    opacity: 0.95; 
 }
 
-/* Efecto hover en el target mismo */
-.service-card:hover {
-    transform: translateY(-5px); /* Pequeña elevación */
-    box-shadow: 0 5px 15px rgba(6, 182, 212, 0.15); /* Sombra externa suave */
-}
-
-/* Definición de la animación de rotación */
-@keyframes rotateBorderLimpid {
+/* Keyframes para que la luz gire sin parar */
+@keyframes rotateAlways {
     from {
-        background: conic-gradient(
-            from 0deg,
-            transparent 0%,
-            #06b6d4 15%,
-            transparent 30%,
-            transparent 100%
-        );
+        transform: rotate(0deg);
     }
     to {
-        background: conic-gradient(
-            from 360deg,
-            transparent 0%,
-            #06b6d4 15%,
-            transparent 30%,
-            transparent 100%
-        );
+        transform: rotate(360deg);
     }
 }
 
-/* Mantenemos tus estilos originales de icono y contenido */
+/* Hover: Solo elevación, el borde ya se está moviendo */
+.service-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Aseguramos que los iconos y textos se vean bien sobre el fondo */
+.service-card i, 
+.service-card h3, 
+.service-card p,
+.service-content {
+    position: relative;
+    z-index: 2;
+}
+
 .service-card i {
     font-size: 2.5rem;
     color: #06b6d4;
     margin-bottom: 15px;
-    position: relative;
-    z-index: 2; /* Aseguramos que el icono esté por encima */
-}
-
-.service-content {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(6, 182, 212, 0.2);
-    color: #94a3b8;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 2; /* Aseguramos que el texto esté por encima */
 }
 
 /* --- 8. LOADER PORTAFOLIO (CORREGIDO GLOBAL) --- */
