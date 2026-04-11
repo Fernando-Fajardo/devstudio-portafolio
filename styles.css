@@ -156,8 +156,13 @@ section {
 /* --- 7. SERVICIOS (BORDES ANIMADOS EN MOVIMIENTO PERMANENTE) --- */
 .services-grid {
     display: grid;
+    /* Esto crea columnas automáticas que se ajustan al tamaño de la pantalla */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    gap: 30px; /* Espacio entre las tarjetas */
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo para que no se estiren demasiado en PC */
+    margin: 0 auto; /* Centra la cuadrícula */
+    padding: 20px;
 }
 
 .service-card {
