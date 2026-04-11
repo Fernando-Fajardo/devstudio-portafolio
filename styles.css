@@ -142,7 +142,7 @@ section, main {
     transform: translateY(-3px);
 }
 
-/* --- 7. SERVICIOS (CON BORDE ANIMADO PERMANENTE) --- */
+/* --- 7. SERVICIOS (BORDE ANIMADO LIMPIO Y NOTORIO) --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -150,60 +150,97 @@ section, main {
 }
 
 .service-card {
+    /* Mantenemos tu fondo y estilos originales INTACTOS */
     background: rgba(255, 255, 255, 0.03);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
-    /* Mantenemos tu borde original pero como base */
-    border: 1px solid rgba(6, 182, 212, 0.1);
     backdrop-filter: blur(5px);
-    transition: 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el hover */
     
-    /* Configuración para el borde animado */
-    position: relative;
-    overflow: hidden; 
-    z-index: 1;
+    /* ESTO ES CRUCIAL */
+    position: relative; /* Para posicionar el borde animado */
+    z-index: 1; /* Para que el contenido esté por encima */
+    border: 1px solid transparent; /* Quitamos tu borde fijo original para usar el animado */
 }
 
-/* El haz de luz que gira detrás */
+/* El pseudo-elemento que crea el borde animado */
 .service-card::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    /* Degradado cian que crea el efecto de línea moviéndose */
+    /* Usamos inset negativo para que el borde se posicione JUSTO sobre el contorno */
+    inset: -1px; /* grosor del borde */
+    border-radius: 16px; /* Ligeramente mayor que el card para que encaje perfecto */
+    padding: 2px; /* Grosor visual del borde animado, ajústalo aquí si quieres que se note más */
+    
+    /* Gradiente cónico con el color cian para el efecto de movimiento */
     background: conic-gradient(
-        transparent, 
-        #06b6d4, 
-        transparent 20%
+        from 0deg,
+        transparent 0%,
+        #06b6d4 15%, /* Punto de luz cian */
+        transparent 30%,
+        transparent 100%
     );
-    animation: rotateBorder 4s linear infinite;
-    z-index: -2;
+    
+    /* Máscara para que solo se vea el borde */
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    /* Animación infinita */
+    animation: rotateBorderLimpid 4s linear infinite;
+    
+    /* Control de visibilidad */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease;
+    z-index: -1; /* Detrás del contenido */
 }
 
-/* Capa que mantiene tu fondo original y crea el carril del borde */
-.service-card::after {
-    content: '';
-    position: absolute;
-    /* Inset de 1px o 2px define el grosor del borde animado */
-    inset: 1px; 
-    background: rgba(10, 10, 10, 0.9); /* Ajustado para que combine con tu fondo base */
-    border-radius: 14px;
-    z-index: -1;
+/* Al pasar el mouse, mostramos el borde animado */
+.service-card:hover::before {
+    opacity: 1;
 }
 
-/* Animación de rotación infinita */
-@keyframes rotateBorder {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+/* Efecto hover en el target mismo */
+.service-card:hover {
+    transform: translateY(-5px); /* Pequeña elevación */
+    box-shadow: 0 5px 15px rgba(6, 182, 212, 0.15); /* Sombra externa suave */
 }
 
+/* Definición de la animación de rotación */
+@keyframes rotateBorderLimpid {
+    from {
+        background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            #06b6d4 15%,
+            transparent 30%,
+            transparent 100%
+        );
+    }
+    to {
+        background: conic-gradient(
+            from 360deg,
+            transparent 0%,
+            #06b6d4 15%,
+            transparent 30%,
+            transparent 100%
+        );
+    }
+}
+
+/* Mantenemos tus estilos originales de icono y contenido */
 .service-card i {
     font-size: 2.5rem;
     color: #06b6d4;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 2; /* Aseguramos que el icono esté por encima */
 }
 
 .service-content {
@@ -212,12 +249,8 @@ section, main {
     border-top: 1px solid rgba(6, 182, 212, 0.2);
     color: #94a3b8;
     font-size: 0.9rem;
-}
-
-/* Hover opcional: si quieres que brille un poco más al tocarlo */
-.service-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(6, 182, 212, 0.5);
+    position: relative;
+    z-index: 2; /* Aseguramos que el texto esté por encima */
 }
 
 /* --- 8. LOADER PORTAFOLIO (CORREGIDO GLOBAL) --- */
