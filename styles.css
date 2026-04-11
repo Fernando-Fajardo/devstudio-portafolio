@@ -142,17 +142,12 @@ section, main {
     transform: translateY(-3px);
 }
 
-/* --- 7. SERVICIOS --- */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
+
 
 /* --- 7. SERVICIOS (CON BORDES ANIMADOS INFINITOS) --- */
 .service-card {
     position: relative;
-    background: #0a0a0a; /* Fondo sólido para tapar el centro del gradiente */
+     background: rgba(255, 255, 255, 0.03); /* Fondo sólido para tapar el centro del gradiente */
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
