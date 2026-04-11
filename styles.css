@@ -79,7 +79,7 @@ section, main {
 /* Color cian para resaltar el texto del Hero */
 .highlight {
     color: #06b6d4 !important;
-    font-weight: 300; /* Para que resalte un poco más como el logo */
+    font-weight: 600; /* Para que resalte un poco más como el logo */
     text-shadow: 0 0 15px rgba(6, 182, 212, 0.3); /* Un brillo muy sutil */
 }
 .container {
