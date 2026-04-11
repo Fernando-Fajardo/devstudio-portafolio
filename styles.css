@@ -622,6 +622,8 @@ option { background: #0a0a0a; color: #fff; }
     color: #ffffff;
     display: inline-flex;
     align-items: center;
+    font-weight: 300 !important; /* Esto quita lo grueso y lo deja como la foto */
+    font-size: 0.95rem;
 }
 
 .services-list i {
