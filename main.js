@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- 3. VARIABLES PRINCIPALES --- */
     const menuToggle = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    const navLinks = document.querySelectorAll('.nav-menu a'); // Ya están declaradas aquí
+    const sections = document.querySelectorAll('section');      // Añadimos esta aquí arriba
     const serviceModal = document.getElementById('service-modal');
     const modalConsulta = document.getElementById("modal-consulta");
     const modalBody = document.getElementById('modal-body-content');
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'auto';
     };
 
-    /* --- 5. LÓGICA DEL MENÚ MÓVIL --- */
+    /* --- 5. LÓGICA DEL MENÚ MÓVIL Y NAVEGACIÓN --- */
     if (menuToggle && navMenu) {
         menuToggle.onclick = (e) => {
             e.stopPropagation();
@@ -54,11 +55,51 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // Manejo de clicks en el menú (Resaltado y Scroll)
     navLinks.forEach(link => {
-        link.onclick = () => cerrarTodo();
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Aplicar clase active visualmente
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                cerrarTodo();
+            }
+        });
     });
 
-    /* --- 6. MODAL DE SERVICIOS --- */
+    /* --- 6. RESALTADO AUTOMÁTICO POR SCROLL --- */
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    /* --- 7. MODAL DE SERVICIOS --- */
     const serviceDetails = {
         'Desarrollo Web': 'Construimos ecosistemas digitales de alto rendimiento bajo arquitecturas escalables. Implementamos tecnologías de vanguardia para garantizar velocidad, seguridad avanzada y una experiencia de usuario (UX) de clase mundial orientada a la conversión profesional.',
         'E-commerce': 'Desarrollamos soluciones transaccionales de alto rendimiento con integración nativa de inventarios, automatización de pedidos y pasarelas de pago blindadas. Nuestros sistemas permiten la gestión omnicanal de stock en tiempo real, asegurando escalabilidad operativa con alta demanda transaccional.',
@@ -84,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    /* --- 7. MODAL DE CONSULTORÍA --- */
+    /* --- 8. MODAL DE CONSULTORÍA --- */
     const btnAbrirConsulta = document.getElementById("btn-iniciar-proyecto");
     if (btnAbrirConsulta) {
         btnAbrirConsulta.onclick = (e) => {
@@ -94,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    /* --- 8. ASIGNACIÓN DE CIERRES --- */
+    /* --- 9. CIERRES Y EVENTOS --- */
     if (closeServiceBtn) closeServiceBtn.onclick = cerrarTodo;
     if (spanCerrarConsulta) spanCerrarConsulta.onclick = cerrarTodo;
 
@@ -106,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === "Escape") cerrarTodo();
     };
 
-    /* --- 9. FORMULARIO EMAILJS --- */
+    /* --- 10. FORMULARIO EMAILJS --- */
     const formConsulta = document.getElementById("form-consulta");
     if (formConsulta) {
         formConsulta.onsubmit = function(e) {
@@ -149,29 +190,4 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => toast.classList.remove("show"), 4000);
         }
     }
-
-    /* --- 10. NAVEGACIÓN LIMPIA --- */
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            
-            // Si el enlace es un ancla (empieza con #)
-            if (targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    // Calculamos la posición exacta
-                    const offsetTop = targetSection.offsetTop;
-
-                    // Hacemos el scroll manualmente para asegurar precisión
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-                cerrarTodo(); // Cierra el menú móvil si estuviera abierto
-            }
-        });
-    });
 });

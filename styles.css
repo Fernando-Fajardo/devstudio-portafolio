@@ -84,9 +84,14 @@ section, main {
 }
 
 /* Efecto hover tipo la imagen de ejemplo */
-.nav-menu li a:hover {
-    background: rgba(6, 182, 212, 0.1);
-    color: #06b6d4;
+.nav-menu li a:hover 
+/* Esto aplica para cualquier botón del menú que esté activo */
+.nav-menu li a.active {
+    background: rgba(6, 182, 212, 0.15) !important;
+    color: #06b6d4 !important;
+    border-radius: 20px; /* Para que el fondo sea redondeado como en tu imagen */
+    font-weight: 600; /* Un poquito más de grosor para resaltar */
+    transition: all 0.3s ease;
 }
 /* --- 4. ESTRUCTURA GENERAL --- */
 /* Color cian para resaltar el texto del Hero */
