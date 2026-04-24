@@ -31,25 +31,23 @@ section, main {
     background: transparent !important;
 }
 
-/* --- 3. NAVEGACIÓN PC --- */
 /* --- 3. NAVEGACIÓN PC (DISEÑO FLOTANTE PREMIUM) --- */
 .nav-main {
     position: fixed;
-    top: 20px; /* Separación del techo */
+    top: 20px; 
     left: 50%;
-    transform: translateX(-50%); /* Estos dos lo centran perfectamente */
-    width: 90%; /* No toca los bordes de la pantalla */
+    transform: translateX(-50%); 
+    width: 90%; 
     max-width: 1100px;
     z-index: 1000;
     
-    /* El fondo translúcido tipo la imagen */
     background: rgba(10, 10, 10, 0.75); 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     
     /* Bordes redondeados y sombra */
     border-radius: 50px;
-    border: 1px solid rgba(6, 182, 212, 0.2); /* Borde cyan muy sutil */
+    border: 1px solid rgba(6, 182, 212, 0.2); 
     padding: 10px 40px;
     
     display: flex;
@@ -70,37 +68,36 @@ section, main {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 10px; /* Espacio entre botones */
+    gap: 10px; 
 }
 
 .nav-menu li a {
     text-decoration: none;
     color: #fff;
     padding: 8px 20px;
-    font-weight: 300; /* Letra delgada como pediste antes */
-    border-radius: 50px; /* Esto crea la forma de cápsula redonda */
+    font-weight: 300;
+    border-radius: 50px; 
     transition: all 0.3s ease;
-    border: none !important; /* ELIMINA la línea recta si existía como borde */
+    border: none !important;
     position: relative;
 }
 
 /* Efecto hover tipo la imagen de ejemplo */
 .nav-menu li a.active, 
 .nav-menu li a:hover {
-    background: rgba(6, 182, 212, 0.2); /* Fondo suave cian */
+    background: rgba(6, 182, 212, 0.2); 
     color: #06b6d4;
-    border: none !important; /* Asegura que no salga la línea */
+    border: none !important;
 }
 .nav-menu li a::after {
-    display: none !important; /* Esto mata cualquier línea rebelde */
+    display: none !important; 
 }
 
 /* --- 4. ESTRUCTURA GENERAL --- */
-/* Color cian para resaltar el texto del Hero */
 .highlight {
     color: #06b6d4 !important;
-    font-weight: 600; /* Para que resalte un poco más como el logo */
-    text-shadow: 0 0 15px rgba(6, 182, 212, 0.3); /* Un brillo muy sutil */
+    font-weight: 600; 
+    text-shadow: 0 0 15px rgba(6, 182, 212, 0.3); 
 }
 .container {
     max-width: 1100px;
@@ -110,14 +107,14 @@ section, main {
 
 /* MODIFICACIÓN: Secciones como páginas independientes */
 section {
-    min-height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
+    justify-content: center; 
     align-items: center;
     position: relative;
-    padding: 100px 0; /* Espacio para el menú superior */
+    padding: 100px 0; 
     box-sizing: border-box;
 }
 
@@ -176,17 +173,15 @@ section {
 /* --- 7. SERVICIOS (BORDES ANIMADOS EN MOVIMIENTO PERMANENTE) --- */
 .services-grid {
     display: grid;
-    /* Esto crea columnas automáticas que se ajustan al tamaño de la pantalla */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; /* Espacio entre las tarjetas */
+    gap: 30px; 
     width: 100%;
-    max-width: 1200px; /* Ancho máximo para que no se estiren demasiado en PC */
-    margin: 0 auto; /* Centra la cuadrícula */
+    max-width: 1200px; 
+    margin: 0 auto; 
     padding: 20px;
 }
 
 .service-card {
-    /* Mantenemos tu fondo y diseño original */
     background: rgba(255, 255, 255, 0.03);
     padding: 30px;
     border-radius: 15px;
@@ -196,7 +191,6 @@ section {
     
     position: relative; 
     z-index: 1;
-    /* Eliminamos el borde sólido para que no interfiera con la luz */
     border: none; 
     overflow: hidden;
 }
@@ -205,7 +199,6 @@ section {
 .service-card::before {
     content: '';
     position: absolute;
-    /* Creamos un área mayor para que al rotar cubra las esquinas */
     top: -50%;
     left: -50%;
     width: 200%;
@@ -216,7 +209,7 @@ section {
         from 0deg,
         transparent 0%,
         #06b6d4 10%, 
-        #06b6d4 20%, /* El color brilla más en este tramo */
+        #06b6d4 20%, 
         transparent 40%,
         transparent 100%
     );
@@ -230,12 +223,10 @@ section {
 .service-card::after {
     content: '';
     position: absolute;
-    /* El inset de 1.5px define el grosor de la línea de luz */
     inset: 1.5px; 
-    background: #0a0a0a; /* Color de fondo oscuro para que resalte la luz */
+    background: #0a0a0a; 
     border-radius: 14px;
     z-index: -1;
-    /* Mantenemos la opacidad de tu diseño original */
     opacity: 0.95; 
 }
 
@@ -254,7 +245,7 @@ section {
     transform: translateY(-8px);
 }
 
-/* Aseguramos que los iconos y textos se vean bien sobre el fondo */
+/* Asegura que los iconos y textos se vean bien sobre el fondo */
 .service-card i, 
 .service-card h3, 
 .service-card p,
@@ -269,7 +260,7 @@ section {
     margin-bottom: 15px;
 }
 
-/* --- 8. LOADER PORTAFOLIO (CORREGIDO GLOBAL) --- */
+/* --- 8. LOADER PORTAFOLIO  --- */
 .loader-container {
     text-align: center;
     padding: 60px 0;
@@ -337,15 +328,14 @@ section {
 /* --- 10. MÓVIL --- */
 @media (max-width: 768px) {
     .hero {
-        /* Centrado Absoluto Vertical y Horizontal */
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important; /* Centra verticalmente */
-        align-items: center !important;     /* Centra horizontalmente */
+        justify-content: center !important; 
+        align-items: center !important;     
         
-        min-height: 100dvh !important;      /* Usa el 100% de la pantalla del iPhone */
+        min-height: 100dvh !important;   
         text-align: center !important;
-        padding: 0 !important;              /* Quitamos el padding-top que lo empujaba */
+        padding: 0 !important;          
         margin: 0 !important;
     }
     .services-grid {
@@ -359,8 +349,8 @@ section {
     }
 
     .service-card {
-        width: 100% !important; /* Que ocupen todo el ancho del cel */
-        max-width: 320px;       /* Pero que no se vean gigantes */
+        width: 100% !important;
+        max-width: 320px; 
         min-height: auto !important;
         padding: 30px 20px !important;
     }
@@ -387,15 +377,12 @@ section {
     /* --- MENÚ TIPO TARJETA MINI (COMPACTA) --- */
     .nav-menu {
         position: fixed;
-        /* Bajamos el menú para que flote más cerca del centro */
         top: 20vh; 
-        
-        /* Ajustamos el alto a 'auto' o un valor pequeño para que no sobre espacio */
         height: auto; 
-        min-height: 350px; /* Altura mínima para que respire */
+        min-height: 350px; 
         
         right: -110%; 
-        width: 75%;   /* Un poco más angosto para que se vea más 'tarjeta' */
+        width: 75%;   
         
         background: rgba(5, 5, 5, 0.96) !important;
         backdrop-filter: blur(25px) !important;
@@ -408,23 +395,19 @@ section {
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 999;
         
-        /* Bordes redondeados perfectos */
+        /* Bordes redondeados */
         border-radius: 30px; 
         border: 1px solid rgba(6, 182, 212, 0.5);
         
-        /* Espaciado interno para que los botones no peguen a los bordes */
         padding: 40px 20px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
     }
 
-    /* Al activarse, flota centrado a la derecha */
     .nav-menu.active {
         right: 5%; 
     }
-
-    /* Cuando el menú se abre, flotea a su posición */
     .nav-menu.active {
-        right: 0; /* Pega al borde derecho de la pantalla */
+        right: 0; 
     }
 
     
@@ -432,13 +415,12 @@ section {
     /* Estilo de las listas de enlaces */
     .nav-menu li {
         margin: 20px 0;
-        opacity: 0; /* Empiezan invisibles */
-        transform: translateX(20px); /* Ligeramente movidos a la derecha */
+        opacity: 0; 
+        transform: translateX(20px); 
         transition: 0.4s ease;
-        transition-delay: 0.2s; /* Pequeño retraso para que abran después del panel */
+        transition-delay: 0.2s; 
     }
 
-    /* Cuando el menú se abre, animamos los enlaces para que aparezcan */
     .nav-menu.active li {
         opacity: 1;
         transform: translateX(0);
@@ -446,15 +428,13 @@ section {
 
     /* Estilo de los textos de los enlaces en móvil */
     .nav-menu li a {
-        font-size: 1.3rem; /* Un poco más grandes y legibles */
-        font-weight: 300; /* Más finos, más elegantes */
+        font-size: 1.3rem;
+        font-weight: 300; 
         color: #f1f5f9;
         text-transform: uppercase;
-        letter-spacing: 2px; /* Espaciado tech entre letras */
+        letter-spacing: 2px;
         position: relative;
     }
-
-    /* La línea cyan debajo del texto (solo en el enlace activo) */
     .nav-menu li a.active::after {
         content: '';
         position: absolute;
@@ -536,21 +516,21 @@ option { background: #0a0a0a; color: #fff; }
 /* --- NOTIFICACIÓN CENTRADA --- */
 .notification-toast {
     position: fixed;
-    top: 50%; /* Centrado vertical */
-    left: 50%; /* Centrado horizontal */
-    transform: translate(-50%, -50%) scale(0.8); /* Empieza pequeño y centrado */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%) scale(0.8);
     background: rgba(10, 10, 10, 0.98);
-    border: 2px solid #06b6d4; /* Borde un poco más grueso para que resalte */
+    border: 2px solid #06b6d4; 
     border-radius: 15px;
     padding: 25px 40px;
     color: white;
-    box-shadow: 0 0 50px rgba(6, 182, 212, 0.5); /* Brillo de ingeniería más fuerte */
+    box-shadow: 0 0 50px rgba(6, 182, 212, 0.5); 
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
-    flex-direction: column; /* Icono arriba, texto abajo */
+    flex-direction: column; 
     align-items: center;
     gap: 15px;
     min-width: 300px;
@@ -561,12 +541,12 @@ option { background: #0a0a0a; color: #fff; }
 .notification-toast.show {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -50%) scale(1); /* Crece a su tamaño original */
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .notification-content i {
     color: #06b6d4;
-    font-size: 3rem; /* Icono más grande para el centro */
+    font-size: 3rem; 
     margin-bottom: 10px;
 }
 
@@ -579,7 +559,7 @@ option { background: #0a0a0a; color: #fff; }
 /* Esto controla el contenedor del logo */
 .nav-brand {
     font-size: 2.2rem;
-    color: #06b6d4; /* El color cian de tus nodos */
+    color: #06b6d4;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -596,7 +576,7 @@ option { background: #0a0a0a; color: #fff; }
 
 /* Estilos del botón hamburguesa */
 .menu-toggle {
-    display: none; /* Oculto en PC */
+    display: none; 
     background: none;
     border: none;
     color: #06b6d4;
@@ -608,7 +588,7 @@ option { background: #0a0a0a; color: #fff; }
 /* Ajustes para móviles (iPhone) */
 @media (max-width: 768px) {
     .menu-toggle {
-        display: block; /* Aparece solo en móviles */
+        display: block; 
         position: relative;
         z-index: 1000;
         color: #06b6d4;
@@ -617,7 +597,7 @@ option { background: #0a0a0a; color: #fff; }
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Escondido a la derecha solo en móvil */
+        right: -100%; 
         width: 80%;
         height: 100vh;
         background: rgba(10, 10, 10, 0.98);
@@ -632,7 +612,7 @@ option { background: #0a0a0a; color: #fff; }
     }
 
     .nav-menu.active {
-        right: 0; /* Se desliza hacia adentro */
+        right: 0; 
     }
 
     .nav-menu li {
@@ -645,7 +625,7 @@ option { background: #0a0a0a; color: #fff; }
     }
 
     .nav-brand {
-        font-size: 1.6rem; /* Achica el logo en el iPhone */
+        font-size: 1.6rem; 
     }
 } /* <--- ESTA ES LA ÚNICA LLAVE QUE DEBE IR AQUÍ */
 
@@ -654,7 +634,7 @@ option { background: #0a0a0a; color: #fff; }
     justify-content: center;
     align-items: center;
     gap: 15px;
-    flex-wrap: wrap; /* Importante para móviles */
+    flex-wrap: wrap; 
     margin-top: 20px;
 }
 
@@ -662,44 +642,42 @@ option { background: #0a0a0a; color: #fff; }
     color: #ffffff;
     display: inline-flex;
     align-items: center;
-    font-weight: 300 !important; /* Esto quita lo grueso y lo deja como la foto */
+    font-weight: 300 !important; 
     font-size: 0.95rem;
 }
 
 .services-list i {
-    color: #06b6d4 !important; /* El azul cian de DevStudio */
+    color: #06b6d4 !important;
     margin-right: 8px;
 }
 
-/* Ajuste para que se vea perfecto en tu iPhone */
+/* Ajuste para que se vea perfecto en  iPhone */
 @media (max-width: 768px) {
     .services-list {
-        flex-direction: column; /* Uno debajo del otro en celular */
+        flex-direction: column;
         gap: 12px;
     }
     .services-list .separator {
-        display: none; /* Quitamos los puntos en móvil */
+        display: none;
     }
 }
 
 /* Reglas especiales para celulares */
 @media (max-width: 768px) {
     .hero h1 {
-        font-size: 2rem; /* Achica el título principal */
+        font-size: 2rem; 
         line-height: 1.2;
     }
 
     .hero p {
-        font-size: 1rem; /* Achica los subtítulos */
+        font-size: 1rem; 
     }
 
-    /* Ajusta los iconos para que no se amontonen */
     .hero-content {
         padding: 0 20px;
         text-align: center;
     }
 
-    /* Si tienes un contenedor de servicios, que se pongan uno abajo del otro */
     .servicios-container {
         display: flex;
         flex-direction: column;
@@ -707,16 +685,14 @@ option { background: #0a0a0a; color: #fff; }
     }
 }
 
-/* Estilo base para los enlaces del menú */
 nav a {
     text-decoration: none;
-    color: #ffffff; /* Color de tu texto */
+    color: #ffffff;
     position: relative;
     padding: 5px 0;
     transition: color 0.3s ease;
 }
 
-/* La línea debajo (el truco de la sombra bonita) */
 nav a::after {
     content: '';
     position: absolute;
@@ -724,11 +700,10 @@ nav a::after {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #00d4ff; /* El color cyan de tu logo */
-    transform: scaleX(0); /* Empieza invisible */
+    background-color: #00d4ff;
+    transform: scaleX(0); 
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
-    /* Aquí la sombra de la línea */
     box-shadow: 0px 0px 8px 1px rgba(0, 212, 255, 0.7); 
 }
 
@@ -744,12 +719,11 @@ nav a.active::after {
 }
 
 nav a.active {
-    color: #00d4ff; /* Resalta el texto también */
+    color: #00d4ff; 
 }
 
 /* --- MODAL DE SERVICIOS (CENTRADO ABSOLUTO CORREGIDO) --- */
 .service-modal {
-    /* 1. EMPIEZA OCULTO (Sin !important aquí) */
     display: none; 
     
     position: fixed;
@@ -758,20 +732,16 @@ nav a.active {
     top: 0;
     width: 100%;
     height: 100%;
-    
-    /* Fondo oscuro y desenfoque */
     background: rgba(0, 0, 0, 0.9) !important;
     backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px);
-    
-    /* 2. ESTO SOLO FUNCIONARÁ CUANDO EL JS ACTIVE EL MODAL */
     justify-content: center;   
     align-items: center;       
 }
 
 /* --- MODAL DE SERVICIOS (VERSION FINAL SIN ERRORES) --- */
 .service-modal {
-    display: none; /* Obligatorio empezar en none */
+    display: none; 
     position: fixed;
     z-index: 3000;
     left: 0;
@@ -781,16 +751,15 @@ nav a.active {
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(15px);
     
-    /* Estos solo funcionarán cuando el JS cambie el display a flex */
     justify-content: center; 
     align-items: center;
 }
 
 .service-modal-content {
-    background: #0a0a0a; /* Fondo sólido para que no sea transparente */
+    background: #0a0a0a;
     width: 100%;
     max-width: 500px;
-    min-height: 250px; /* Obliga a la caja a tener altura */
+    min-height: 250px; 
     padding: 50px 30px;
     border: 1px solid rgba(6, 182, 212, 0.4);
     border-radius: 30px;
@@ -798,7 +767,6 @@ nav a.active {
     text-align: center;
     box-shadow: 0 0 50px rgba(0, 0, 0, 1);
     
-    /* Aseguramos que el contenido sea visible */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -807,7 +775,6 @@ nav a.active {
     animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* El botón de cerrar ahora es independiente del flujo */
 .close-service {
     position: absolute;
     right: 20px;
